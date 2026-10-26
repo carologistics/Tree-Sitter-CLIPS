@@ -1,0 +1,67 @@
+================================================================================
+Top-level calls mixed with constructs
+================================================================================
+
+(load "rules.clp")
+(defglobal ?*x* = 5)
+( defglobal MAIN ?*y* = (= 1 1))
+(reset)
+(printout t "hi" crlf)
+(assert (ready))
+(run)
+(exit)
+
+--------------------------------------------------------------------------------
+
+(CLIPS_program
+  (function_call
+    (function_name
+      (symbol))
+    (constant
+      (string)))
+  (construct
+    (defglobal_construct
+      (global_assignment
+        (global_variable)
+        (constant
+          (number
+            (integer))))))
+  (construct
+    (defglobal_construct
+      (name
+        (symbol))
+      (global_assignment
+        (global_variable)
+        (function_call
+          (function_name)
+          (constant
+            (number
+              (integer)))
+          (constant
+            (number
+              (integer)))))))
+  (function_call
+    (function_name
+      (symbol)))
+  (function_call
+    (function_name
+      (symbol))
+    (constant
+      (symbol))
+    (constant
+      (string))
+    (constant
+      (symbol)))
+  (function_call
+    (fact_action
+      (fact_action_name)
+      (RHS_pattern
+        (ordered_RHS_pattern
+          (name
+            (symbol))))))
+  (function_call
+    (function_name
+      (symbol)))
+  (function_call
+    (function_name
+      (symbol))))

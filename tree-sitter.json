@@ -1,0 +1,42 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "clips",
+      "camelcase": "CLIPS",
+      "title": "CLIPS",
+      "scope": "source.clips",
+      "file-types": [
+        "clp"
+      ],
+      "injection-regex": "^clips$",
+      "class-name": "TreeSitterClips"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.1",
+    "license": "MIT",
+    "description": "tree-sitter grammar for CLIPS",
+    "authors": [
+      {
+        "name": "Tarik Viehmann, Mohammad Ashar Zaman  ",
+        "email": "viehmann@kbsg.rwth-aachen.de",
+        "url": ""
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/eXcaliflopdev/treesitter-CLIPS",
+      "funding": ""
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "java": false,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true,
+    "zig": false
+  }
+}

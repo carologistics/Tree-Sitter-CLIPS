@@ -1,0 +1,89 @@
+================================================================================
+Return statements
+================================================================================
+
+(deftemplate test-template
+  (slot bambus (type SYMBOL) (allowed-values TRUE FALSE))
+  (multislot granit (type SYMBOL) (default (create$ 2 4)))
+  (slot proc-start (type FLOAT))
+  (multislot down-period (type FLOAT) (cardinality 2 2) (default -1.0 -1.0))
+)
+
+
+--------------------------------------------------------------------------------
+
+(CLIPS_program
+  (construct
+    (deftemplate_construct
+      (name
+        (symbol))
+      (slot_definition
+        (single_slot_definition
+          (name
+            (symbol))
+          (template_attribute
+            (constraint_attribute
+              (type_attribute
+                (type_specification
+                  (allowed_type)))))
+          (template_attribute
+            (constraint_attribute
+              (allowed_constant_attribute
+                (value_list
+                  (constant
+                    (symbol))
+                  (constant
+                    (symbol))))))))
+      (slot_definition
+        (multislot_definition
+          (name
+            (symbol))
+          (template_attribute
+            (constraint_attribute
+              (type_attribute
+                (type_specification
+                  (allowed_type)))))
+          (template_attribute
+            (default_attribute
+              (function_call
+                (function_name
+                  (symbol))
+                (constant
+                  (number
+                    (integer)))
+                (constant
+                  (number
+                    (integer))))))))
+      (slot_definition
+        (single_slot_definition
+          (name
+            (symbol))
+          (template_attribute
+            (constraint_attribute
+              (type_attribute
+                (type_specification
+                  (allowed_type)))))))
+      (slot_definition
+        (multislot_definition
+          (name
+            (symbol))
+          (template_attribute
+            (constraint_attribute
+              (type_attribute
+                (type_specification
+                  (allowed_type)))))
+          (template_attribute
+            (constraint_attribute
+              (cardinality_attribute
+                (cardinality_specification
+                  (integer))
+                (cardinality_specification
+                  (integer)))))
+          (template_attribute
+            (default_attribute
+              (constant
+                (number
+                  (float)))
+              (constant
+                (number
+                  (float))))))))))

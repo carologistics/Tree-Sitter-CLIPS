@@ -1,0 +1,88 @@
+================================================================================
+A wildcard followed by a symbol is two fields, not a variable
+================================================================================
+
+(defrule r (ordered ? x) (other $? y) (t (id ?id)) => )
+
+--------------------------------------------------------------------------------
+
+(CLIPS_program
+  (construct
+    (defrule_construct
+      (name
+        (symbol))
+      (defrule_body
+        (conditional_element
+          (pattern_CE
+            (ordered_pattern_CE
+              (name
+                (symbol))
+              (constraint)
+              (constraint
+                (connected_constraint
+                  (single_constraint
+                    (term
+                      (constant
+                        (symbol)))))))))
+        (conditional_element
+          (pattern_CE
+            (ordered_pattern_CE
+              (name
+                (symbol))
+              (constraint)
+              (constraint
+                (connected_constraint
+                  (single_constraint
+                    (term
+                      (constant
+                        (symbol)))))))))
+        (conditional_element
+          (pattern_CE
+            (template_pattern_CE
+              (name
+                (symbol))
+              (LHS_slot
+                (single_field_LHS_slot
+                  (name
+                    (symbol))
+                  (constraint
+                    (connected_constraint
+                      (single_constraint
+                        (term
+                          (single_field_variable
+                            (symbol)))))))))))))))
+
+================================================================================
+range and cardinality with ?VARIABLE
+================================================================================
+
+(deftemplate t (slot a (range ?VARIABLE 10)) (multislot b (cardinality 1 ?VARIABLE)))
+
+--------------------------------------------------------------------------------
+
+(CLIPS_program
+  (construct
+    (deftemplate_construct
+      (name
+        (symbol))
+      (slot_definition
+        (single_slot_definition
+          (name
+            (symbol))
+          (template_attribute
+            (constraint_attribute
+              (range_attribute
+                (range_specification)
+                (range_specification
+                  (number
+                    (integer))))))))
+      (slot_definition
+        (multislot_definition
+          (name
+            (symbol))
+          (template_attribute
+            (constraint_attribute
+              (cardinality_attribute
+                (cardinality_specification
+                  (integer))
+                (cardinality_specification)))))))))

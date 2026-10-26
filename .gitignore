@@ -1,0 +1,41 @@
+# Node artifacts
+build/
+prebuilds/
+node_modules/
+
+# C artifacts
+*.a
+*.so
+*.so.*
+*.dylib
+*.dll
+*.pc
+*.exp
+*.lib
+
+# Grammar stuff
+*.wasm
+*.obj
+*.o
+
+# Archives
+*.tar.gz
+*.tgz
+*.zip
+*.jar
+
+# Bindings for other languages
+/bindings/c/
+/bindings/go/
+/bindings/python/
+/bindings/rust/
+/bindings/swift/
+/CMakeLists.txt
+/Makefile
+/go.mod
+/Cargo.toml
+/pyproject.toml
+/Package.swift
+
+test-parser.js
+test-parser.mjs

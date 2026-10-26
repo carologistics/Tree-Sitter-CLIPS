@@ -1,0 +1,157 @@
+================================================================================
+Brackets: instance names are one token, other bracketed words are symbols
+================================================================================
+
+(deffunction f () (create$ [a] [MAIN::c1] [a:b] [a][b] a[1] ] ]abc a] [abc [] ))
+
+--------------------------------------------------------------------------------
+
+(CLIPS_program
+  (construct
+    (deffunction_construct
+      (name
+        (symbol))
+      (action
+        (function_call
+          (function_name
+            (symbol))
+          (constant
+            (instance_name))
+          (constant
+            (instance_name))
+          (constant
+            (instance_name))
+          (constant
+            (instance_name))
+          (constant
+            (symbol))
+          (constant
+            (symbol))
+          (constant
+            (symbol))
+          (constant
+            (symbol))
+          (constant
+            (symbol))
+          (constant
+            (symbol)))))))
+
+================================================================================
+Variable names start with a letter, UTF-8 or *; a wildcard may be followed by a symbol
+================================================================================
+
+(deffunction f (?a ?größe $?rest) (printout t ?a ?*g* ?self:x))
+(defrule r (t (x ?x_y)) (o ? _x) =>)
+
+--------------------------------------------------------------------------------
+
+(CLIPS_program
+  (construct
+    (deffunction_construct
+      (name
+        (symbol))
+      (regular_parameter
+        (single_field_variable
+          (symbol)))
+      (regular_parameter
+        (single_field_variable
+          (symbol)))
+      (wildcard_parameter
+        (multifield_variable
+          (symbol)))
+      (action
+        (function_call
+          (function_name
+            (symbol))
+          (constant
+            (symbol))
+          (variable
+            (single_field_variable
+              (symbol)))
+          (variable
+            (global_variable))
+          (variable
+            (special_variable
+              (symbol)
+              (name
+                (symbol))))))))
+  (construct
+    (defrule_construct
+      (name
+        (symbol))
+      (defrule_body
+        (conditional_element
+          (pattern_CE
+            (template_pattern_CE
+              (name
+                (symbol))
+              (LHS_slot
+                (single_field_LHS_slot
+                  (name
+                    (symbol))
+                  (constraint
+                    (connected_constraint
+                      (single_constraint
+                        (term
+                          (single_field_variable
+                            (symbol)))))))))))
+        (conditional_element
+          (pattern_CE
+            (ordered_pattern_CE
+              (name
+                (symbol))
+              (constraint)
+              (constraint
+                (connected_constraint
+                  (single_constraint
+                    (term
+                      (constant
+                        (symbol)))))))))))))
+
+================================================================================
+Logical CEs first, then the others
+================================================================================
+
+(defrule r (declare (salience 1)) (logical (a)) (logical (b)) (c) (not (logical (d))) => )
+
+--------------------------------------------------------------------------------
+
+(CLIPS_program
+  (construct
+    (defrule_construct
+      (name
+        (symbol))
+      (defrule_body
+        (declaration
+          (rule_property
+            (constant
+              (number
+                (integer)))))
+        (conditional_element
+          (logical_CE
+            (conditional_element
+              (pattern_CE
+                (ordered_pattern_CE
+                  (name
+                    (symbol)))))))
+        (conditional_element
+          (logical_CE
+            (conditional_element
+              (pattern_CE
+                (ordered_pattern_CE
+                  (name
+                    (symbol)))))))
+        (conditional_element
+          (pattern_CE
+            (ordered_pattern_CE
+              (name
+                (symbol)))))
+        (conditional_element
+          (not_CE
+            (conditional_element
+              (logical_CE
+                (conditional_element
+                  (pattern_CE
+                    (ordered_pattern_CE
+                      (name
+                        (symbol)))))))))))))

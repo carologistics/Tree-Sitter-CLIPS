@@ -1,0 +1,305 @@
+================================================================================
+Floats in all CLIPS spellings
+================================================================================
+
+(deffunction f () (+ 1e3 2.5E-2 .5 -.25 5. 1.5 7))
+
+--------------------------------------------------------------------------------
+
+(CLIPS_program
+  (construct
+    (deffunction_construct
+      (name
+        (symbol))
+      (action
+        (function_call
+          (function_name
+            (symbol))
+          (constant
+            (number
+              (float)))
+          (constant
+            (number
+              (float)))
+          (constant
+            (number
+              (float)))
+          (constant
+            (number
+              (float)))
+          (constant
+            (number
+              (float)))
+          (constant
+            (number
+              (float)))
+          (constant
+            (number
+              (integer))))))))
+
+================================================================================
+Symbols with single colons, qualified instance names, multifield globals
+================================================================================
+
+(deffunction f () (create$ 12:30 http://x.org [a:b] [MAIN::c] $?*g* ?self:x MAIN::foo))
+
+--------------------------------------------------------------------------------
+
+(CLIPS_program
+  (construct
+    (deffunction_construct
+      (name
+        (symbol))
+      (action
+        (function_call
+          (function_name
+            (symbol))
+          (constant
+            (symbol))
+          (constant
+            (symbol))
+          (constant
+            (instance_name))
+          (constant
+            (instance_name))
+          (variable
+            (multifield_global_variable))
+          (variable
+            (special_variable
+              (symbol)
+              (name
+                (symbol))))
+          (constant
+            (qualified_name
+              (symbol)
+              (symbol))))))))
+
+================================================================================
+Variables after a wildcard position in patterns
+================================================================================
+
+(defrule r (t (id ?id)) (c (counts ? $?)) => )
+
+--------------------------------------------------------------------------------
+
+(CLIPS_program
+  (construct
+    (defrule_construct
+      (name
+        (symbol))
+      (defrule_body
+        (conditional_element
+          (pattern_CE
+            (template_pattern_CE
+              (name
+                (symbol))
+              (LHS_slot
+                (single_field_LHS_slot
+                  (name
+                    (symbol))
+                  (constraint
+                    (connected_constraint
+                      (single_constraint
+                        (term
+                          (single_field_variable
+                            (symbol)))))))))))
+        (conditional_element
+          (pattern_CE
+            (template_pattern_CE
+              (name
+                (symbol))
+              (LHS_slot
+                (multifield_LHS_slot
+                  (name
+                    (symbol))
+                  (constraint)
+                  (constraint))))))))))
+
+================================================================================
+Empty if bodies and with-open-file
+================================================================================
+
+(deffunction f (?x)
+  (if ?x then)
+  (if ?x then 1 else)
+  (with-open-file ("out.txt" outf "w") (printout outf "hi" crlf))
+  (with-open-file (?name inf) (readline inf)))
+
+--------------------------------------------------------------------------------
+
+(CLIPS_program
+  (construct
+    (deffunction_construct
+      (name
+        (symbol))
+      (regular_parameter
+        (single_field_variable
+          (symbol)))
+      (action
+        (function_call
+          (if_statement
+            (variable
+              (single_field_variable
+                (symbol)))
+            (then))))
+      (action
+        (function_call
+          (if_statement
+            (variable
+              (single_field_variable
+                (symbol)))
+            (then)
+            (cond_body
+              (constant
+                (number
+                  (integer))))
+            (else))))
+      (action
+        (function_call
+          (with_open_file_expression
+            (file_specification
+              (constant
+                (string))
+              (constant
+                (symbol))
+              (constant
+                (string)))
+            (action
+              (function_call
+                (function_name
+                  (symbol))
+                (constant
+                  (symbol))
+                (constant
+                  (string))
+                (constant
+                  (symbol)))))))
+      (action
+        (function_call
+          (with_open_file_expression
+            (file_specification
+              (variable
+                (single_field_variable
+                  (symbol)))
+              (constant
+                (symbol)))
+            (action
+              (function_call
+                (function_name
+                  (symbol))
+                (constant
+                  (symbol))))))))))
+
+================================================================================
+Query restrictions that are expressions
+================================================================================
+
+(deffunction f (?t ?c ?o)
+  (find-all-facts ((?f ?t) (?g (sym-cat a b))) TRUE)
+  (find-all-instances ((?i ?c) (?j (class ?o)) (?k USER)) TRUE))
+
+--------------------------------------------------------------------------------
+
+(CLIPS_program
+  (construct
+    (deffunction_construct
+      (name
+        (symbol))
+      (regular_parameter
+        (single_field_variable
+          (symbol)))
+      (regular_parameter
+        (single_field_variable
+          (symbol)))
+      (regular_parameter
+        (single_field_variable
+          (symbol)))
+      (action
+        (function_call
+          (fact_query
+            (find_all_facts_expression
+              (fact_set_template
+                (fact_set_member_template
+                  (single_field_variable
+                    (symbol))
+                  (variable
+                    (single_field_variable
+                      (symbol))))
+                (fact_set_member_template
+                  (single_field_variable
+                    (symbol))
+                  (function_call
+                    (function_name
+                      (symbol))
+                    (constant
+                      (symbol))
+                    (constant
+                      (symbol)))))
+              (query
+                (constant
+                  (symbol)))))))
+      (action
+        (function_call
+          (instance_query
+            (find_all_instances_expression
+              (instance_set_template
+                (instance_set_member_template
+                  (single_field_variable
+                    (symbol))
+                  (variable
+                    (single_field_variable
+                      (symbol))))
+                (instance_set_member_template
+                  (single_field_variable
+                    (symbol))
+                  (function_call
+                    (function_name
+                      (symbol))
+                    (variable
+                      (single_field_variable
+                        (symbol)))))
+                (instance_set_member_template
+                  (single_field_variable
+                    (symbol))
+                  (name
+                    (symbol))))
+              (query
+                (constant
+                  (symbol))))))))))
+
+================================================================================
+Defclass default-dynamic and options in any order
+================================================================================
+
+(defclass C (is-a USER)
+  (slot a)
+  (pattern-match reactive)
+  (slot id (default-dynamic (gensym*)))
+  (role concrete)
+  (multislot b))
+
+--------------------------------------------------------------------------------
+
+(CLIPS_program
+  (construct
+    (defclass_construct
+      (name
+        (symbol))
+      (name
+        (symbol))
+      (slot
+        (name
+          (symbol)))
+      (pattern_match_role)
+      (slot
+        (name
+          (symbol))
+        (facet
+          (default_facet
+            (function_call
+              (function_name
+                (symbol))))))
+      (role)
+      (slot
+        (name
+          (symbol))))))

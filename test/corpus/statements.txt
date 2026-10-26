@@ -1,0 +1,124 @@
+================================================================================
+Return statements
+================================================================================
+
+(defglobal ?*TEST* = 3)
+
+(deffacts hiho
+  (foo (bar x) (bom z))
+  (myfirstconstant z)
+)
+
+(defrule gua-lua
+  (foo (bar 4) (bom ""))
+  ?f <- (foo (bar 4) (bom ""))
+  =>
+  (retract ?f)
+)
+
+--------------------------------------------------------------------------------
+
+(CLIPS_program
+  (construct
+    (defglobal_construct
+      (global_assignment
+        (global_variable)
+        (constant
+          (number
+            (integer))))))
+  (construct
+    (deffacts_construct
+      (name
+        (symbol))
+      (deffacts_body
+        (RHS_pattern
+          (ordered_RHS_pattern
+            (name
+              (symbol))
+            (RHS_field
+              (function_call
+                (function_name
+                  (symbol))
+                (constant
+                  (symbol))))
+            (RHS_field
+              (function_call
+                (function_name
+                  (symbol))
+                (constant
+                  (symbol)))))))
+      (deffacts_body
+        (RHS_pattern
+          (ordered_RHS_pattern
+            (name
+              (symbol))
+            (RHS_field
+              (constant
+                (symbol))))))))
+  (construct
+    (defrule_construct
+      (name
+        (symbol))
+      (defrule_body
+        (conditional_element
+          (pattern_CE
+            (template_pattern_CE
+              (name
+                (symbol))
+              (LHS_slot
+                (single_field_LHS_slot
+                  (name
+                    (symbol))
+                  (constraint
+                    (connected_constraint
+                      (single_constraint
+                        (term
+                          (constant
+                            (number
+                              (integer)))))))))
+              (LHS_slot
+                (single_field_LHS_slot
+                  (name
+                    (symbol))
+                  (constraint
+                    (connected_constraint
+                      (single_constraint
+                        (term
+                          (constant
+                            (string)))))))))))
+        (conditional_element
+          (assigned_pattern_CE
+            (single_field_variable
+              (symbol))
+            (pattern_CE
+              (template_pattern_CE
+                (name
+                  (symbol))
+                (LHS_slot
+                  (single_field_LHS_slot
+                    (name
+                      (symbol))
+                    (constraint
+                      (connected_constraint
+                        (single_constraint
+                          (term
+                            (constant
+                              (number
+                                (integer)))))))))
+                (LHS_slot
+                  (single_field_LHS_slot
+                    (name
+                      (symbol))
+                    (constraint
+                      (connected_constraint
+                        (single_constraint
+                          (term
+                            (constant
+                              (string))))))))))))
+        (action
+          (function_call
+            (function_name
+              (symbol))
+            (variable
+              (single_field_variable
+                (symbol)))))))))

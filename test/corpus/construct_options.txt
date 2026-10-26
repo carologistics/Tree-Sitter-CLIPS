@@ -1,0 +1,71 @@
+================================================================================
+Deftemplate field and multifield are slot synonyms
+================================================================================
+
+(deftemplate avh (field a) (multifield v (type SYMBOL)) (slot h) (multislot z))
+
+--------------------------------------------------------------------------------
+
+(CLIPS_program
+  (construct
+    (deftemplate_construct
+      (name
+        (symbol))
+      (slot_definition
+        (single_slot_definition
+          (name
+            (symbol))))
+      (slot_definition
+        (multislot_definition
+          (name
+            (symbol))
+          (template_attribute
+            (constraint_attribute
+              (type_attribute
+                (type_specification
+                  (allowed_type)))))))
+      (slot_definition
+        (single_slot_definition
+          (name
+            (symbol))))
+      (slot_definition
+        (multislot_definition
+          (name
+            (symbol)))))))
+
+================================================================================
+Defclass options in any order after is-a
+================================================================================
+
+(defclass WeakAcid
+  (is-a Acid) (pattern-match reactive)
+  (slot PH (type FLOAT))
+  (role concrete)
+  (message-handler check)
+  (multislot tags))
+
+--------------------------------------------------------------------------------
+
+(CLIPS_program
+  (construct
+    (defclass_construct
+      (name
+        (symbol))
+      (name
+        (symbol))
+      (pattern_match_role)
+      (slot
+        (name
+          (symbol))
+        (facet
+          (constraint_attribute
+            (type_attribute
+              (type_specification
+                (allowed_type))))))
+      (role)
+      (handler_documentation
+        (name
+          (symbol)))
+      (slot
+        (name
+          (symbol))))))

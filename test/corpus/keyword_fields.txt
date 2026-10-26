@@ -1,0 +1,127 @@
+================================================================================
+Fact field headed by a special-function keyword
+================================================================================
+
+(deffacts kb (rule (if backbone is yes) (then superphylum is backbone)))
+
+--------------------------------------------------------------------------------
+
+(CLIPS_program
+  (construct
+    (deffacts_construct
+      (name
+        (symbol))
+      (deffacts_body
+        (RHS_pattern
+          (ordered_RHS_pattern
+            (name
+              (symbol))
+            (RHS_field
+              (function_call
+                (function_name
+                  (symbol))
+                (constant
+                  (symbol))
+                (constant
+                  (symbol))
+                (constant
+                  (symbol))))
+            (RHS_field
+              (function_call
+                (function_name
+                  (symbol))
+                (constant
+                  (symbol))
+                (constant
+                  (symbol))
+                (constant
+                  (symbol))))))))))
+
+================================================================================
+Special function inside a fact field keeps its own form
+================================================================================
+
+(defrule r ?x <- (a) => (assert (foo (if ?c then yes else no) (modify ?x (b 1)))))
+
+--------------------------------------------------------------------------------
+
+(CLIPS_program
+  (construct
+    (defrule_construct
+      (name
+        (symbol))
+      (defrule_body
+        (conditional_element
+          (assigned_pattern_CE
+            (single_field_variable
+              (symbol))
+            (pattern_CE
+              (ordered_pattern_CE
+                (name
+                  (symbol))))))
+        (action
+          (function_call
+            (fact_action
+              (fact_action_name)
+              (RHS_pattern
+                (ordered_RHS_pattern
+                  (name
+                    (symbol))
+                  (RHS_field
+                    (function_call
+                      (if_statement
+                        (variable
+                          (single_field_variable
+                            (symbol)))
+                        (then)
+                        (cond_body
+                          (constant
+                            (symbol)))
+                        (else)
+                        (cond_body
+                          (constant
+                            (symbol))))))
+                  (RHS_field
+                    (function_call
+                      (fact_action
+                        (fact_action_name)
+                        (variable
+                          (single_field_variable
+                            (symbol)))
+                        (RHS_slot
+                          (single_field_RHS_slot
+                            (name
+                              (symbol))
+                            (RHS_field
+                              (constant
+                                (number
+                                  (integer))))))))))))))))))
+
+================================================================================
+Module-qualified name as an argument
+================================================================================
+
+(defrule m => (focus MAIN) (undeffacts MAIN::kb))
+
+--------------------------------------------------------------------------------
+
+(CLIPS_program
+  (construct
+    (defrule_construct
+      (name
+        (symbol))
+      (defrule_body
+        (action
+          (function_call
+            (function_name
+              (symbol))
+            (constant
+              (symbol))))
+        (action
+          (function_call
+            (function_name
+              (symbol))
+            (constant
+              (qualified_name
+                (symbol)
+                (symbol)))))))))

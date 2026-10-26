@@ -1,0 +1,45 @@
+================================================================================
+Return statements
+================================================================================
+
+(defrule testrule
+(no-indent-template (id ?id))
+;(very-long-key this is a long key) (more-fields that cross line length))
+=>
+(printout t "i am also horribly formatted" crlf)
+)
+--------------------------------------------------------------------------------
+
+(CLIPS_program
+  (construct
+    (defrule_construct
+      (name
+        (symbol))
+      (defrule_body
+        (conditional_element
+          (pattern_CE
+            (template_pattern_CE
+              (name
+                (symbol))
+              (LHS_slot
+                (multifield_LHS_slot
+                  (name
+                    (symbol))
+                  (constraint)
+                  (constraint
+                    (connected_constraint
+                      (single_constraint
+                        (term
+                          (constant
+                            (symbol)))))))))))
+        (comment_line)
+        (action
+          (function_call
+            (function_name
+              (symbol))
+            (constant
+              (symbol))
+            (constant
+              (string))
+            (constant
+              (symbol))))))))

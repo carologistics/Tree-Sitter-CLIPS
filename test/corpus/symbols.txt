@@ -1,0 +1,59 @@
+================================================================================
+Symbols follow CLIPS delimiter rules
+================================================================================
+
+(deffunction ne? (?x $?rest)
+  (if (!= ?x 1) then (create$ type.animal a!b x@y {x} $abc <= ?self:slot [inst] $?rest)))
+
+--------------------------------------------------------------------------------
+
+(CLIPS_program
+  (construct
+    (deffunction_construct
+      (name
+        (symbol))
+      (regular_parameter
+        (single_field_variable
+          (symbol)))
+      (wildcard_parameter
+        (multifield_variable
+          (symbol)))
+      (action
+        (function_call
+          (if_statement
+            (function_call
+              (function_name
+                (symbol))
+              (variable
+                (single_field_variable
+                  (symbol)))
+              (constant
+                (number
+                  (integer))))
+            (then)
+            (cond_body
+              (function_call
+                (function_name
+                  (symbol))
+                (constant
+                  (symbol))
+                (constant
+                  (symbol))
+                (constant
+                  (symbol))
+                (constant
+                  (symbol))
+                (constant
+                  (symbol))
+                (constant
+                  (symbol))
+                (variable
+                  (special_variable
+                    (symbol)
+                    (name
+                      (symbol))))
+                (constant
+                  (instance_name))
+                (variable
+                  (multifield_variable
+                    (symbol)))))))))))

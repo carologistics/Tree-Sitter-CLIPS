@@ -1,0 +1,82 @@
+================================================================================
+A call's value as one RHS field: =(...)
+================================================================================
+
+(defrule step
+  ?s <- (state (depth ?d))
+  =>
+  (duplicate ?s (depth =(+ 1 ?d)))
+  (assert (count =(+ ?d 1)))
+  (println =))
+
+--------------------------------------------------------------------------------
+
+(CLIPS_program
+  (construct
+    (defrule_construct
+      (name
+        (symbol))
+      (defrule_body
+        (conditional_element
+          (assigned_pattern_CE
+            (single_field_variable
+              (symbol))
+            (pattern_CE
+              (template_pattern_CE
+                (name
+                  (symbol))
+                (LHS_slot
+                  (single_field_LHS_slot
+                    (name
+                      (symbol))
+                    (constraint
+                      (connected_constraint
+                        (single_constraint
+                          (term
+                            (single_field_variable
+                              (symbol))))))))))))
+        (action
+          (function_call
+            (fact_action
+              (fact_action_name)
+              (variable
+                (single_field_variable
+                  (symbol)))
+              (RHS_slot
+                (single_field_RHS_slot
+                  (name
+                    (symbol))
+                  (RHS_field
+                    (function_call
+                      (function_name
+                        (symbol))
+                      (constant
+                        (number
+                          (integer)))
+                      (variable
+                        (single_field_variable
+                          (symbol))))))))))
+        (action
+          (function_call
+            (fact_action
+              (fact_action_name)
+              (RHS_pattern
+                (ordered_RHS_pattern
+                  (name
+                    (symbol))
+                  (RHS_field
+                    (function_call
+                      (function_name
+                        (symbol))
+                      (variable
+                        (single_field_variable
+                          (symbol)))
+                      (constant
+                        (number
+                          (integer))))))))))
+        (action
+          (function_call
+            (function_name
+              (symbol))
+            (constant
+              (symbol))))))))
