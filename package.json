@@ -12,17 +12,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/excaliflopdev/treesitter-clips.git"
+    "url": "git+https://github.com/carologistics/Tree-Sitter-CLIPS.git"
   },
   "funding": "",
   "license": "MIT",
   "author": {
-    "name": "Tarik Viehmann, Mohammad Ashar Zaman  ",
+    "name": "Tarik Viehmann, Mohammad Ashar Zaman",
     "email": "viehmann@kbsg.rwth-aachen.de",
     "url": ""
   },
-  "main": "bindings/node",
-  "types": "bindings/node",
   "keywords": [
     "incremental",
     "parsing",
